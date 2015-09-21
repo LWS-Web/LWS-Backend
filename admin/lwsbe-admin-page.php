@@ -167,14 +167,28 @@ function lwsb_hide_menus_render(  ) {
 		<label for="itsec"><?php _e('iThemes Security (formerly Better WP Security)', 'lwsb-plugin'); ?></label><br />
 	<?php }; ?>
 
+	<!-- WP Lister for Ebay (free) -->
+	<?php if ( is_plugin_active( 'wp-lister-for-ebay/wp-lister.php' ) ) { ?>
+		<input type="checkbox" id="wplis" name="lwsb_settings[wplis]" <?php checked( $options['wplis'], 'wplis' ); ?> value="wplis" />
+		<label for="wplis"><?php _e('WP Lister for Ebay (free)', 'lwsb-plugin'); ?></label><br />
+	<?php }; ?>
+
+	<!-- SumoMe -->
+	<?php if ( is_plugin_active( 'sumome/sumome.php' ) ) { ?>
+		<input type="checkbox" id="sumome" name="lwsb_settings[sumome]" <?php checked( $options['sumome'], 'sumome' ); ?> value="sumome" />
+		<label for="sumome"><?php _e('SumoMe', 'lwsb-plugin'); ?></label><br />
+	<?php }; ?>
+
+	<!-- Google Analytics Dashboard for WP -->
+	<?php if ( is_plugin_active( 'google-analytics-dashboard-for-wp/gadwp.php' ) ) { ?>
+		<input type="checkbox" id="gadwp" name="lwsb_settings[gadwp]" <?php checked( $options['gadwp'], 'gadwp' ); ?> value="gadwp" />
+		<label for="gadwp"><?php _e('Google Analytics Dashboard for WP', 'lwsb-plugin'); ?></label><br />
+	<?php }; ?>
+
+	<!-- END of plugin list -->
+
 	<br />
 	<p class="description"><em><?php _e('Checked items will be hidden for all non-admins.', 'lwsb-plugin'); ?></em></p>
-
-
-
-
-
-
 
 <?php 
 }

@@ -35,6 +35,9 @@ Set options in `Settings > LWS Backend`.
 
 ## Changelog
 
+### 1.0.3
+* Added support for: WP Lister, SumoMe, Google Analytics Dashboard for WP
+
 ### 1.0.2
 * Added some 3rd party plugin-support
 

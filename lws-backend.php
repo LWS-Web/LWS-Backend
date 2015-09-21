@@ -4,7 +4,7 @@ Plugin Name: LWS Backend
 Plugin URI: https://github.com/LWS-Web/LWS-Backend
 Description: Customize the WordPress backend.
 Author: Mo
-Version: 1.0.2
+Version: 1.0.3
 Author URI: -
 License: GPLv2
 */
@@ -193,6 +193,10 @@ function lws_remove_menus(){
     $wpseo_hide = $lwsb_option['wpseo'];
     $ncrc_hide = $lwsb_option['ncrc'];
     $itsec_hide = $lwsb_option['itsec'];
+    $wplis_hide = $lwsb_option['wplis'];
+    $sumome_hide = $lwsb_option['sumome'];
+    $gadwp_hide = $lwsb_option['gadwp'];
+    $ywcwl_hide = $lwsb_option['ywcwl'];
 
     //Admin hide?
 
@@ -255,6 +259,12 @@ function lws_remove_menus(){
         	if (isset($ncrc_hide)) { remove_menu_page( 'ncr-config' ); }
         //Remove iThemes Security (formerly Better WP Security)
         	if (isset($itsec_hide)) { remove_menu_page( 'itsec' ); }
+        //Remove WP Lister for Ebay
+          if (isset($wplis_hide)) { remove_menu_page( 'wplister' ); }
+        //Remove SumoMe
+          if (isset($sumome_hide)) { remove_menu_page( 'options-general.php?page=sumome' ); }
+        //Remove Google Analytics Dashboard for WP
+          if (isset($gadwp_hide)) { remove_menu_page( 'gadash_settings' ); }
 
     }//END array_intersect
 
