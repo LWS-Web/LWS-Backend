@@ -33,12 +33,6 @@ Set options in `Settings > LWS Backend`.
 
 ***
 
-## Screenshot
-
-![LWS Backend options-page](/../screenshots/lws-backend.jpg?raw=true "LWS Backend options-page")
-
-***
-
 ## Changelog
 
 ### 1.0.2
