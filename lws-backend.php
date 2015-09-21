@@ -183,20 +183,20 @@ function lws_remove_menus(){
     $users_hide = $lwsb_option['users'];
     $tools_hide = $lwsb_option['tools'];
     $settings_hide = $lwsb_option['settings'];
-    $wpcf7_hide = $lwsb_option['wpcf7'];
-    $role_scoper_hide = $lwsb_option['role-scoper'];
-    $bwpup_hide = $lwsb_option['bwpup'];
-    $wps_hide = $lwsb_option['wps'];
-    $aloem_hide = $lwsb_option['aloem'];
-    $acf_hide = $lwsb_option['acf'];
-    $woocpf_hide = $lwsb_option['woocpf'];
-    $wpseo_hide = $lwsb_option['wpseo'];
-    $ncrc_hide = $lwsb_option['ncrc'];
-    $itsec_hide = $lwsb_option['itsec'];
-    $wplis_hide = $lwsb_option['wplis'];
-    $sumome_hide = $lwsb_option['sumome'];
-    $gadwp_hide = $lwsb_option['gadwp'];
-    $ywcwl_hide = $lwsb_option['ywcwl'];
+
+    $wpcf7_hide = $lwsb_option['contact-form-7'];//
+    $role_scoper_hide = $lwsb_option['role-scoper'];///
+    $bwpup_hide = $lwsb_option['backwpup'];//
+    $wps_hide = $lwsb_option['wp-security-scan'];///
+    $aloem_hide = $lwsb_option['alo-easymail'];///
+    $acf_hide = $lwsb_option['advanced-custom-fields'];///
+    $woocpf_hide = $lwsb_option['purple-xmls-google-product-feed-for-woocommerce'];///
+    $wpseo_hide = $lwsb_option['wordpress-seo'];///
+    $ncrc_hide = $lwsb_option['no-captcha-recaptcha'];///
+    $itsec_hide = $lwsb_option['better-wp-security'];//
+    $wplis_hide = $lwsb_option['wp-lister-for-ebay'];//
+    $sumome_hide = $lwsb_option['sumome'];///
+    $gadwp_hide = $lwsb_option['google-analytics-dashboard-for-wp'];///
 
     //Admin hide?
 

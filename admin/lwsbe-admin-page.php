@@ -41,11 +41,20 @@ function lwsb_settings_init() {
 	 * Add page setting fields
 	 */
 
-	// Hide menu items
+	// Hide default menu items
 	add_settings_field( 
 		'lwsb_hide_menus', 
-		__( 'Hide Backend-Menus', 'lwsb-plugin' ), 
+		__( 'Hide Default Menus', 'lwsb-plugin' ), 
 		'lwsb_hide_menus_render', 
+		'lwsbPage', 
+		'lwsb_section_btn' 
+	);
+
+	// Hide 3rd party plugins
+	add_settings_field( 
+		'lwsb_hide_plugin_menus', 
+		__( 'Hide Plugin Menus', 'lwsb-plugin' ), 
+		'lwsb_hide_plugin_menus_render', 
 		'lwsbPage', 
 		'lwsb_section_btn' 
 	);
@@ -105,93 +114,50 @@ function lwsb_hide_menus_render(  ) {
 	<input type="checkbox" id="settings" name="lwsb_settings[settings]" <?php checked( $options['settings'], 'settings' ); ?> value="settings" />
 	<label for="settings"><?php _e('Settings', 'lwsb-plugin'); ?></label><br />
 
-	<h4><?php _e('Additional Active Plugins', 'lwsb-plugin'); ?></h4>
+<?php 
+}
 
-	<!-- Contact Form 7 -->
-	<?php if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) { ?>
-		<input type="checkbox" id="wpcf7" name="lwsb_settings[wpcf7]" <?php checked( $options['wpcf7'], 'wpcf7' ); ?> value="wpcf7" />
-		<label for="wpcf7"><?php _e('Contact Form 7', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
 
-	<!-- Role Scoper -->
-	<?php if ( is_plugin_active( 'role-scoper/role-scoper.php' ) ) { ?>
-		<input type="checkbox" id="role-scoper" name="lwsb_settings[role-scoper]" <?php checked( $options['role-scoper'], 'role-scoper' ); ?> value="role-scoper" />
-		<label for="role-scoper"><?php _e('Role Scoper', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+function lwsb_hide_plugin_menus_render(  ) { 
 
-	<!-- BackWPup -->
-	<?php if ( is_plugin_active( 'backwpup/backwpup.php' ) ) { ?>
-		<input type="checkbox" id="bwpup" name="lwsb_settings[bwpup]" <?php checked( $options['bwpup'], 'bwpup' ); ?> value="bwpup" />
-		<label for="bwpup"><?php _e('BackWPup', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+	$plugins = get_plugins();
 
-	<!-- WP Security -->
-	<?php if ( is_plugin_active( 'wp-security-scan/index.php' ) ) { ?>
-		<input type="checkbox" id="wps" name="lwsb_settings[wps]" <?php checked( $options['wps'], 'wps' ); ?> value="wps" />
-		<label for="wps"><?php _e('WP Security (Acunetix WP Security)', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+	foreach ($plugins as $plugin_path => $plugin) {
 
-	<!-- ALO EasyMail Newsletter -->
-	<?php if ( is_plugin_active( 'alo-easymail/alo-easymail.php' ) ) { ?>
-		<input type="checkbox" id="aloem" name="lwsb_settings[aloem]" <?php checked( $options['aloem'], 'aloem' ); ?> value="aloem" />
-		<label for="aloem"><?php _e('ALO EasyMail Newsletter', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
 
-	<!-- Advanced Custom Fields -->
-	<?php if ( is_plugin_active( 'advanced-custom-fields/acf.php' ) ) { ?>
-		<input type="checkbox" id="acf" name="lwsb_settings[acf]" <?php checked( $options['acf'], 'acf' ); ?> value="acf" />
-		<label for="acf"><?php _e('Advanced Custom Fields', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+		// We split the plugin path
+		$path = parse_url($plugin_path, PHP_URL_PATH);
+		$segments = explode('/', rtrim($path, '/'));
 
-	<!-- Cart Product Feed -->
-	<?php if ( is_plugin_active( 'purple-xmls-google-product-feed-for-woocommerce/cart-product-feed.php' ) ) { ?>
-		<input type="checkbox" id="woocpf" name="lwsb_settings[woocpf]" <?php checked( $options['woocpf'], 'woocpf' ); ?> value="woocpf" />
-		<label for="woocpf"><?php _e('Cart Product Feed', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+		// Get the plugin directory and filename
+		$plugin_dir = $segments[0];
+		$plugin_file = $segments[1];
 
-	<!-- WordPress SEO -->
-	<?php if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) { ?>
-		<input type="checkbox" id="wpseo" name="lwsb_settings[wpseo]" <?php checked( $options['wpseo'], 'wpseo' ); ?> value="wpseo" />
-		<label for="wpseo"><?php _e('WordPress SEO', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+		$plugin_name = $plugin['Name'];
+		$plugin_version = $plugin['Version'];
 
-	<!-- No CAPTCHA reCAPTCHA -->
-	<?php if ( is_plugin_active( 'no-captcha-recaptcha/no-captcha-recaptcha.php' ) ) { ?>
-		<input type="checkbox" id="ncrc" name="lwsb_settings[ncrc]" <?php checked( $options['ncrc'], 'ncrc' ); ?> value="ncrc" />
-		<label for="ncrc"><?php _e('No CAPTCHA reCAPTCHA', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+		if ( is_plugin_active( $plugin_path ) ) { 
 
-	<!-- iThemes Security (formerly Better WP Security) -->
-	<?php if ( is_plugin_active( 'better-wp-security/better-wp-security.php' ) ) { ?>
-		<input type="checkbox" id="itsec" name="lwsb_settings[itsec]" <?php checked( $options['itsec'], 'itsec' ); ?> value="itsec" />
-		<label for="itsec"><?php _e('iThemes Security (formerly Better WP Security)', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+			$options = get_option( 'lwsb_settings' );
+			
+			if ($plugin_dir != 'lws-backend') {
+			?>
 
-	<!-- WP Lister for Ebay (free) -->
-	<?php if ( is_plugin_active( 'wp-lister-for-ebay/wp-lister.php' ) ) { ?>
-		<input type="checkbox" id="wplis" name="lwsb_settings[wplis]" <?php checked( $options['wplis'], 'wplis' ); ?> value="wplis" />
-		<label for="wplis"><?php _e('WP Lister for Ebay (free)', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+				<input type="checkbox" id="<?php echo $plugin_dir; ?>" name="lwsb_settings[<?php echo $plugin_dir; ?>]" <?php checked( $options[$plugin_dir], $plugin_dir ); ?> value="<?php echo $plugin_dir; ?>" />
+				<label for="<?php echo $plugin_dir; ?>"><?php echo $plugin_name; ?></label> <code><?php echo $plugin_dir; ?></code><br />
+			
+		<?php } // END is is not lws-backend
 
-	<!-- SumoMe -->
-	<?php if ( is_plugin_active( 'sumome/sumome.php' ) ) { ?>
-		<input type="checkbox" id="sumome" name="lwsb_settings[sumome]" <?php checked( $options['sumome'], 'sumome' ); ?> value="sumome" />
-		<label for="sumome"><?php _e('SumoMe', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+		}// END if plugin is active
 
-	<!-- Google Analytics Dashboard for WP -->
-	<?php if ( is_plugin_active( 'google-analytics-dashboard-for-wp/gadwp.php' ) ) { ?>
-		<input type="checkbox" id="gadwp" name="lwsb_settings[gadwp]" <?php checked( $options['gadwp'], 'gadwp' ); ?> value="gadwp" />
-		<label for="gadwp"><?php _e('Google Analytics Dashboard for WP', 'lwsb-plugin'); ?></label><br />
-	<?php }; ?>
+	}// END foreach
 
-	<!-- END of plugin list -->
+?>
 
 	<br />
 	<p class="description"><em><?php _e('Checked items will be hidden for all non-admins.', 'lwsb-plugin'); ?></em></p>
 
-<?php 
-}
+<?php }//END lwsb_hide_plugin_menus_render
 
 
 function lwsb_admin_css_render(  ) { 
